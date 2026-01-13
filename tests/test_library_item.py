@@ -14,41 +14,73 @@ from genre.genre import Genre
 
 class TestLibraryItem(unittest.TestCase):
     """
-    Test cases for the LibraryItem class.
+    Unit tests for the LibraryItem class.
     """
 
-    def test_valid_library_item_creation(self):
-        item = LibraryItem("Harry Potter", "J.K. Rowling", Genre.FANTASY)
-        self.assertEqual(item.title, "Harry Potter")
-        self.assertEqual(item.author, "J.K. Rowling")
-        self.assertEqual(item.genre, Genre.FANTASY)
+    def test_init_valid_inputs_attributes_set_correctly(self):
+        # Arrange
+        title = "Harry Potter"
+        author = "J.K. Rowling"
+        genre = Genre.FANTASY
 
-    def test_blank_title_raises_exception(self):
+        # Act
+        library_item = LibraryItem(title, author, genre)
+
+        # Assert (using name mangling)
+        self.assertEqual(library_item._LibraryItem__title, title)
+        self.assertEqual(library_item._LibraryItem__author, author)
+        self.assertEqual(library_item._LibraryItem__genre, genre)
+
+    def test_init_blank_title_raises_exception(self):
+        # Arrange / Act / Assert
         with self.assertRaises(ValueError) as context:
             LibraryItem("   ", "J.K. Rowling", Genre.FANTASY)
+
         self.assertEqual(str(context.exception), "Title cannot be blank.")
 
-    def test_blank_author_raises_exception(self):
+    def test_init_blank_author_raises_exception(self):
+        # Arrange / Act / Assert
         with self.assertRaises(ValueError) as context:
             LibraryItem("Harry Potter", "", Genre.FANTASY)
+
         self.assertEqual(str(context.exception), "Author cannot be blank.")
 
-    def test_invalid_genre_raises_exception(self):
+    def test_init_invalid_genre_raises_exception(self):
+        # Arrange / Act / Assert
         with self.assertRaises(ValueError) as context:
             LibraryItem("Harry Potter", "J.K. Rowling", "Fantasy")
+
         self.assertEqual(str(context.exception), "Invalid Genre.")
 
-    def test_title_accessor(self):
-        item = LibraryItem("1984", "George Orwell", Genre.FICTION)
-        self.assertEqual(item.title, "1984")
+    def test_title_accessor_returns_title(self):
+        # Arrange
+        library_item = LibraryItem("1984", "George Orwell", Genre.FICTION)
 
-    def test_author_accessor(self):
-        item = LibraryItem("1984", "George Orwell", Genre.FICTION)
-        self.assertEqual(item.author, "George Orwell")
+        # Act
+        result = library_item.title
 
-    def test_genre_accessor(self):
-        item = LibraryItem("1984", "George Orwell", Genre.FICTION)
-        self.assertEqual(item.genre, Genre.FICTION)
+        # Assert
+        self.assertEqual(result, "1984")
+
+    def test_author_accessor_returns_author(self):
+        # Arrange
+        library_item = LibraryItem("1984", "George Orwell", Genre.FICTION)
+
+        # Act
+        result = library_item.author
+
+        # Assert
+        self.assertEqual(result, "George Orwell")
+
+    def test_genre_accessor_returns_genre(self):
+        # Arrange
+        library_item = LibraryItem("1984", "George Orwell", Genre.FICTION)
+
+        # Act
+        result = library_item.genre
+
+        # Assert
+        self.assertEqual(result, Genre.FICTION)
 
 
 if __name__ == "__main__":
