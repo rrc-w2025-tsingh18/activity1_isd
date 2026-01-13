@@ -16,33 +16,40 @@ def main():
     in this project.
     """
     # In the statements coded below, ensure that any statement that could result
-    # in an exception is handled. When exceptions are 'caught', display the exception
-    # message to the console.
+    # in an exception is handled. When exceptions are 'caught', display the
+    # exception message to the console.
 
-    # 1. Code a statement which creates an instance of the LibraryItem class with valid inputs.
-    # Use your own unique valid values for the inputs to the class.
+    # 1. Create a LibraryItem instance with valid inputs
     try:
         library_item = LibraryItem(
+            1001,
             "The Hobbit",
             "J.R.R. Tolkien",
-            Genre.FANTASY
+            Genre.FANTASY,
+            False
         )
     except ValueError as error:
         print(error)
 
-    # 2. Using the instance defined above, and the class Accessors, print
-    # each of the attributes of the LibraryItem instance.
+    # 2. Print each attribute using accessors
     try:
+        print(library_item.item_id)
         print(library_item.title)
         print(library_item.author)
         print(library_item.genre)
+        print(library_item.is_borrowed)
     except ValueError as error:
         print(error)
 
-    # 3. Code a statement which creates an instance of the LibraryItem class with one or more invalid inputs.
-    # Use your own unique valid values for the inputs to the class.
+    # 3. Create a LibraryItem instance with invalid inputs
     try:
-        LibraryItem("", "Unknown Author", Genre.FICTION)
+        LibraryItem(
+            "ABC",
+            "Invalid Book",
+            "Unknown Author",
+            Genre.FICTION,
+            "no"
+        )
     except ValueError as error:
         print(error)
 
