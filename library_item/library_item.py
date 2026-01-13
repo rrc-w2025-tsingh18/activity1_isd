@@ -10,17 +10,27 @@ from genre.genre import Genre
 
 class LibraryItem:
     """
-    Represents a single library item.
+    Represents a single library item in the library system.
+
+    Attributes:
+        title (str): The title of the library item.
+        author (str): The author of the library item.
+        genre (Genre): The Genre of the library item.
     """
 
     def __init__(self, title: str, author: str, genre: Genre):
         """
-        Initialize a LibraryItem object.
+        Initialize a LibraryItem instance.
 
         Args:
-            title (str): The title of the item.
-            author (str): The author of the item.
-            genre (Genre): The genre of the item.
+            title (str): The title of the library item.
+            author (str): The author of the library item.
+            genre (Genre): The Genre of the library item.
+
+        Raises:
+            ValueError: If title is blank.
+            ValueError: If author is blank.
+            ValueError: If genre is not a valid Genre.
         """
         title = title.strip()
         if not title:
@@ -40,6 +50,9 @@ class LibraryItem:
     def title(self) -> str:
         """
         Get the title of the library item.
+
+        Returns:
+            str: The title of the library item.
         """
         return self.__title
 
@@ -47,6 +60,9 @@ class LibraryItem:
     def author(self) -> str:
         """
         Get the author of the library item.
+
+        Returns:
+            str: The author of the library item.
         """
         return self.__author
 
@@ -54,6 +70,8 @@ class LibraryItem:
     def genre(self) -> Genre:
         """
         Get the genre of the library item.
+
+        Returns:
+            Genre: The Genre of the library item.
         """
         return self.__genre
-
