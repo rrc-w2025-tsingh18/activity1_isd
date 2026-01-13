@@ -19,68 +19,88 @@ class TestLibraryItem(unittest.TestCase):
 
     def test_init_valid_inputs_attributes_set_correctly(self):
         # Arrange
-        title = "Harry Potter"
-        author = "J.K. Rowling"
+        item_id = 101
+        title = "The Hobbit"
+        author = "J.R.R. Tolkien"
         genre = Genre.FANTASY
+        is_borrowed = False
 
         # Act
-        library_item = LibraryItem(title, author, genre)
+        library_item = LibraryItem(
+            item_id, title, author, genre, is_borrowed
+        )
 
-        # Assert (using name mangling)
+        # Assert (name mangling)
+        self.assertEqual(library_item._LibraryItem__item_id, item_id)
         self.assertEqual(library_item._LibraryItem__title, title)
         self.assertEqual(library_item._LibraryItem__author, author)
         self.assertEqual(library_item._LibraryItem__genre, genre)
+        self.assertEqual(
+            library_item._LibraryItem__is_borrowed, is_borrowed
+        )
 
-    def test_init_blank_title_raises_exception(self):
-        # Arrange / Act / Assert
+    def test_init_item_id_not_numeric_raises_exception(self):
         with self.assertRaises(ValueError) as context:
-            LibraryItem("   ", "J.K. Rowling", Genre.FANTASY)
+            LibraryItem(
+                "ABC",
+                "The Hobbit",
+                "J.R.R. Tolkien",
+                Genre.FANTASY,
+                False
+            )
 
-        self.assertEqual(str(context.exception), "Title cannot be blank.")
+        self.assertEqual(
+            str(context.exception),
+            "Item Id must be numeric."
+        )
 
-    def test_init_blank_author_raises_exception(self):
-        # Arrange / Act / Assert
+    def test_init_is_borrowed_not_boolean_raises_exception(self):
         with self.assertRaises(ValueError) as context:
-            LibraryItem("Harry Potter", "", Genre.FANTASY)
+            LibraryItem(
+                101,
+                "The Hobbit",
+                "J.R.R. Tolkien",
+                Genre.FANTASY,
+                "yes"
+            )
 
-        self.assertEqual(str(context.exception), "Author cannot be blank.")
+        self.assertEqual(
+            str(context.exception),
+            "Is Borrowed must be a boolean value."
+        )
 
-    def test_init_invalid_genre_raises_exception(self):
-        # Arrange / Act / Assert
-        with self.assertRaises(ValueError) as context:
-            LibraryItem("Harry Potter", "J.K. Rowling", "Fantasy")
+    def test_item_id_accessor_returns_item_id(self):
+        library_item = LibraryItem(
+            101,
+            "1984",
+            "George Orwell",
+            Genre.FICTION,
+            False
+        )
 
-        self.assertEqual(str(context.exception), "Invalid Genre.")
+        self.assertEqual(library_item.item_id, 101)
 
-    def test_title_accessor_returns_title(self):
-        # Arrange
-        library_item = LibraryItem("1984", "George Orwell", Genre.FICTION)
+    def test_is_borrowed_accessor_returns_false(self):
+        library_item = LibraryItem(
+            102,
+            "1984",
+            "George Orwell",
+            Genre.FICTION,
+            False
+        )
 
-        # Act
-        result = library_item.title
+        self.assertFalse(library_item.is_borrowed)
 
-        # Assert
-        self.assertEqual(result, "1984")
+    def test_is_borrowed_accessor_returns_true(self):
+        library_item = LibraryItem(
+            103,
+            "1984",
+            "George Orwell",
+            Genre.FICTION,
+            True
+        )
 
-    def test_author_accessor_returns_author(self):
-        # Arrange
-        library_item = LibraryItem("1984", "George Orwell", Genre.FICTION)
-
-        # Act
-        result = library_item.author
-
-        # Assert
-        self.assertEqual(result, "George Orwell")
-
-    def test_genre_accessor_returns_genre(self):
-        # Arrange
-        library_item = LibraryItem("1984", "George Orwell", Genre.FICTION)
-
-        # Act
-        result = library_item.genre
-
-        # Assert
-        self.assertEqual(result, Genre.FICTION)
+        self.assertTrue(library_item.is_borrowed)
 
 
 if __name__ == "__main__":
