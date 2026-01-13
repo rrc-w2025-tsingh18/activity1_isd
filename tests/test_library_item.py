@@ -5,7 +5,7 @@ Usage:
 """
 
 __author__ = "Taranpreet Singh"
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 import unittest
 from library_item.library_item import LibraryItem
@@ -17,7 +17,7 @@ class TestLibraryItem(unittest.TestCase):
     Unit tests for the LibraryItem class.
     """
 
-    def test_init_valid_inputs_attributes_set_correctly(self):
+    def test_init_valid_inputs_sets_attributes(self):
         # Arrange
         item_id = 101
         title = "The Hobbit"
@@ -69,7 +69,7 @@ class TestLibraryItem(unittest.TestCase):
             "Is Borrowed must be a boolean value."
         )
 
-    def test_item_id_accessor_returns_item_id(self):
+    def test_item_id_valid_item_returns_item_id(self):
         library_item = LibraryItem(
             101,
             "1984",
@@ -80,7 +80,7 @@ class TestLibraryItem(unittest.TestCase):
 
         self.assertEqual(library_item.item_id, 101)
 
-    def test_is_borrowed_accessor_returns_false(self):
+    def test_is_borrowed_false_input_returns_false(self):
         library_item = LibraryItem(
             102,
             "1984",
@@ -91,7 +91,7 @@ class TestLibraryItem(unittest.TestCase):
 
         self.assertFalse(library_item.is_borrowed)
 
-    def test_is_borrowed_accessor_returns_true(self):
+    def test_is_borrowed_true_input_returns_true(self):
         library_item = LibraryItem(
             103,
             "1984",
