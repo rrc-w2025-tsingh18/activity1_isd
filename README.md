@@ -7,7 +7,9 @@ This activity will help to reinforce learning of the Module 1 concepts of:
 - Unit Test Planning
 
 ## Author
-[Your name]
+Taranpreet Singh
 
 ## Additional Information
-[ Use this space to include additional information that may help in your learning. ]
+This activity was completed in two parts.  
+In Part 1, a basic LibraryItem class was created with validation, documentation, unit tests and a client program.  
+In Part 2, the class was extended by adding new attributes, updating validation, expanding documentation, updating unit tests based on a revised test plan and modifying the client program to use the updated constructor.
